@@ -1,8 +1,9 @@
-import { Accordion,AccordionSummary,AccordionDetails,Typography,Stack,Box } from "@mui/material";
+import { Accordion,AccordionSummary,AccordionDetails,Typography,Stack,Box,Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import QuestionType from "../../questionTypes/QuestionType";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { fetchMockTest } from "../../utils/RequestEndPoints";
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 const MockTest = ({ setView, id }) => {
     const [cards, setCards] = useState([]);
     const [title, setTitle] = useState();
@@ -20,7 +21,8 @@ const MockTest = ({ setView, id }) => {
     return (
         <>
             {!isPending && (
-                <Box sx={{padding:"2%"}}>
+          <Box sx={{ padding: "2%" }}>
+            <Button onClick={setView("default")}><ChevronLeftIcon/> All Tests </Button>
                 <Stack  spacing={2}>
                         <Accordion>
         <AccordionSummary

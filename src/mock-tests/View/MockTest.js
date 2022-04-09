@@ -2,6 +2,7 @@ import { Accordion,AccordionSummary,AccordionDetails,Typography,Stack,Box } from
 import { useEffect, useState } from "react";
 import QuestionType from "../../questionTypes/QuestionType";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { fetchMockTest } from "../../utils/RequestEndPoints";
 const MockTest = ({ setView, id }) => {
     const [cards, setCards] = useState([]);
     const [title, setTitle] = useState();
@@ -9,16 +10,11 @@ const MockTest = ({ setView, id }) => {
     const [isPending, setIsPending] = useState(true);
     useEffect(() => {
         setTimeout(() => {
-            fetch('http://localhost:8000/mockTests/'+id)
-                .then(res => {
-                    return res.json();
-                })
-                .then(data => {
-                    setTitle(data.title);
-                    setDescription(data.description);
-                    setCards(data.mockTests);
-                    setIsPending(false);
-                })
+            const response = fetchMockTest(id);
+            setTitle(response.title);
+            setDescription(response.description);
+            setCards(response.mockTests);
+            setIsPending(false);
         }, 1000);
     }, []);
     return (

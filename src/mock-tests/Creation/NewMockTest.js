@@ -4,6 +4,7 @@ import NewMockTestThumbnail from "./NewMockTestThumbnail";
 import { useState } from "react";
 import CreateNewMockTest from "./CreateNewMockTest";
 import HomeIcon from '@mui/icons-material/Home';
+import { createMockTest } from "../../utils/RequestEndPoints";
 const NewMockTest = ({setView}) => {
     const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -11,12 +12,13 @@ const NewMockTest = ({setView}) => {
   const [mockTest, setMockTest] = useState([]);
 
     const saveMockTest = () => {
-        const body = { title, description, mockTest,mode };
-        fetch(' http://localhost:8000/mockTests/', {
-      method: 'POST',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body)
-    }).then(() => {
+      const body = {
+        "title": title,
+        "description": description,
+        "mockTest": mockTest,
+        "mode":mode
+      };
+      const res = createMockTest(body).then(() => {
       console.log('new mock test added');
     })
       setView("default");

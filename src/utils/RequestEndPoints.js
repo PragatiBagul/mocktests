@@ -87,3 +87,49 @@ export const createMockTest = async (body) => {
     return res;
 }
 
+export const userSignJWTVerification = (user) => {
+    const body = {
+        "Name": user.displayName,
+        "Email": user.email,
+        "PhotoURL": user.photoURL,
+        "id":user.uid
+    }
+    const requestUrl = 'http://localhost:8080/user';
+    const options = {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: body,
+    };
+    const res = request(requestUrl, options).then(response => response.data);    
+    return res;
+};
+
+export const fetchUserProfile = async() => {
+    const requestUrl = 'http://localhost:8080/user/';
+    const options = {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+    };
+    const res = await request(requestUrl, options).then(response => response.data);    
+    return res;
+}
+
+export const updateUserDetails = async (body) => {
+    const requestUrl = 'http://localhost:8080/user/update';
+    const options = {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: body,
+    };
+    const res = await request(requestUrl, options).then(response => response.data);    
+    return res;
+}
